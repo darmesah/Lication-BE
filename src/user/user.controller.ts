@@ -31,7 +31,7 @@ export class UserController {
     return req.user;
   }
 
-  @Post('create-certificate')
+  @Post('create-certificate-application')
   @HttpCode(HttpStatus.OK)
   async createCertificate(@Req() req, @Body() payload) {
     return await this.userService.createCertificate(req.user._id, payload);
