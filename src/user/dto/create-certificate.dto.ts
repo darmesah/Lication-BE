@@ -60,7 +60,7 @@ export class CreateCertificateDTO {
   @ApiProperty({ required: false })
   @IsString()
   @IsNotEmpty()
-  passortNumber: string;
+  passportNumber: string;
 
   @ApiProperty({ required: false })
   @IsString()

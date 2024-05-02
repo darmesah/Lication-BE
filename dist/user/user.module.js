@@ -20,7 +20,13 @@ exports.UserModule = UserModule = __decorate([
     (0, common_1.Module)({
         imports: [
             auth_module_1.AuthModule,
-            mongoose_1.MongooseModule.forFeature([{ name: 'User', schema: model_1.UserSchema }]),
+            mongoose_1.MongooseModule.forFeature([
+                { name: 'User', schema: model_1.UserSchema },
+                {
+                    name: 'UserCertificateApplication',
+                    schema: model_1.UserCertificateApplicationSchema,
+                },
+            ]),
         ],
         controllers: [user_controller_1.UserController],
         providers: [user_service_1.UserService],

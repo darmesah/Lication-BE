@@ -53,7 +53,7 @@ exports.UserCertificateApplicationSchema = new Schema({
         type: String,
         required: true,
     },
-    passortNumber: {
+    passportNumber: {
         type: String,
         required: true,
     },

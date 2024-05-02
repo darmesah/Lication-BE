@@ -13,7 +13,7 @@ export interface IUserCertificateApplication extends Document {
   address: string;
   state: string;
   lga: string;
-  passortNumber: string;
+  passportNumber: string;
   dateOfIssue: string;
   dateOfExpiry: string;
   placeOfIssue: string;

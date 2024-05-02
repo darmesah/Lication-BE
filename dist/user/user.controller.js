@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const user_service_1 = require("./user.service");
 const guards_1 = require("../auth/guards");
+const dto_1 = require("./dto");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
@@ -24,8 +25,14 @@ let UserController = class UserController {
     async getUser(req) {
         return req.user;
     }
-    async createCertificate(req, payload) {
-        return await this.userService.createCertificate(req.user._id, payload);
+    async getCertificateApplications(req) {
+        return await this.userService.getCertificateApplications(req.user._id);
+    }
+    async getCertificateApplication(req, certificateApplicationId) {
+        return await this.userService.getCertificateApplication(req.user._id, certificateApplicationId);
+    }
+    async createCertificateApplication(req, payload) {
+        return await this.userService.createCertificateApplication(req.user._id, payload);
     }
 };
 exports.UserController = UserController;
@@ -38,14 +45,31 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getUser", null);
 __decorate([
+    (0, common_1.Get)('get-certificate-applications'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getCertificateApplications", null);
+__decorate([
+    (0, common_1.Get)('get-certificate-application/:certificateApplicationId'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Param)('certificateApplicationId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getCertificateApplication", null);
+__decorate([
     (0, common_1.Post)('create-certificate-application'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, dto_1.CreateCertificateDTO]),
     __metadata("design:returntype", Promise)
-], UserController.prototype, "createCertificate", null);
+], UserController.prototype, "createCertificateApplication", null);
 exports.UserController = UserController = __decorate([
     (0, swagger_1.ApiTags)('User'),
     (0, swagger_1.ApiBearerAuth)(),

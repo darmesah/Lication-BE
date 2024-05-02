@@ -3,13 +3,71 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { cloudinaryUploader } from 'src/common/service/fileUpload';
 import { idVerification } from 'src/common/service/idVerification';
-import { IUser } from 'src/database/interface';
+import { IUser, IUserCertificateApplication } from 'src/database/interface';
+import { CreateCertificateDTO } from './dto';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel('User') private userModel: Model<IUser>) {}
+  constructor(
+    @InjectModel('User') private userModel: Model<IUser>,
+    @InjectModel('UserCertificateApplication')
+    private userCertificateApplicationModel: Model<IUserCertificateApplication>,
+  ) {}
 
-  async createCertificate(userId: string, payload) {}
+  async createCertificateApplication(
+    userId: string,
+    payload: CreateCertificateDTO,
+  ) {
+    try {
+      const newCertificate = await this.userCertificateApplicationModel.create({
+        ...payload,
+        userId,
+      });
+
+      return {
+        message: 'Certifacate application created successfully',
+        newCertificate,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getCertificateApplications(userId: string) {
+    try {
+      const certificateApplications =
+        await this.userCertificateApplicationModel.find({
+          userId,
+        });
+
+      return {
+        message: 'Certifacate applications',
+        certificateApplications,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getCertificateApplication(
+    userId: string,
+    certificateApplicationId: string,
+  ) {
+    try {
+      const certificateApplication =
+        await this.userCertificateApplicationModel.findOne({
+          userId,
+          _id: certificateApplicationId,
+        });
+
+      return {
+        message: 'Certifacate application',
+        certificateApplication,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
 
   // async hideVerificationAlert(userId) {
   //   try {

@@ -17,15 +17,61 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 let UserService = class UserService {
-    constructor(userModel) {
+    constructor(userModel, userCertificateApplicationModel) {
         this.userModel = userModel;
+        this.userCertificateApplicationModel = userCertificateApplicationModel;
     }
-    async createCertificate(userId, payload) { }
+    async createCertificateApplication(userId, payload) {
+        try {
+            const newCertificate = await this.userCertificateApplicationModel.create({
+                ...payload,
+                userId,
+            });
+            return {
+                message: 'Certifacate application created successfully',
+                newCertificate,
+            };
+        }
+        catch (error) {
+            throw error;
+        }
+    }
+    async getCertificateApplications(userId) {
+        try {
+            const certificateApplications = await this.userCertificateApplicationModel.find({
+                userId,
+            });
+            return {
+                message: 'Certifacate applications',
+                certificateApplications,
+            };
+        }
+        catch (error) {
+            throw error;
+        }
+    }
+    async getCertificateApplication(userId, certificateApplicationId) {
+        try {
+            const certificateApplication = await this.userCertificateApplicationModel.findOne({
+                userId,
+                _id: certificateApplicationId,
+            });
+            return {
+                message: 'Certifacate application',
+                certificateApplication,
+            };
+        }
+        catch (error) {
+            throw error;
+        }
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)('User')),
-    __metadata("design:paramtypes", [mongoose_2.Model])
+    __param(1, (0, mongoose_1.InjectModel)('UserCertificateApplication')),
+    __metadata("design:paramtypes", [mongoose_2.Model,
+        mongoose_2.Model])
 ], UserService);
 //# sourceMappingURL=user.service.js.map

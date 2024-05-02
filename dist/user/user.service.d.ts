@@ -23,9 +23,28 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 import { Model } from 'mongoose';
-import { IUser } from 'src/database/interface';
+import { IUser, IUserCertificateApplication } from 'src/database/interface';
+import { CreateCertificateDTO } from './dto';
 export declare class UserService {
     private userModel;
-    constructor(userModel: Model<IUser>);
-    createCertificate(userId: string, payload: any): Promise<void>;
+    private userCertificateApplicationModel;
+    constructor(userModel: Model<IUser>, userCertificateApplicationModel: Model<IUserCertificateApplication>);
+    createCertificateApplication(userId: string, payload: CreateCertificateDTO): Promise<{
+        message: string;
+        newCertificate: import("mongoose").Document<unknown, {}, IUserCertificateApplication> & IUserCertificateApplication & {
+            _id: import("mongoose").Types.ObjectId;
+        };
+    }>;
+    getCertificateApplications(userId: string): Promise<{
+        message: string;
+        certificateApplications: (import("mongoose").Document<unknown, {}, IUserCertificateApplication> & IUserCertificateApplication & {
+            _id: import("mongoose").Types.ObjectId;
+        })[];
+    }>;
+    getCertificateApplication(userId: string, certificateApplicationId: string): Promise<{
+        message: string;
+        certificateApplication: import("mongoose").Document<unknown, {}, IUserCertificateApplication> & IUserCertificateApplication & {
+            _id: import("mongoose").Types.ObjectId;
+        };
+    }>;
 }

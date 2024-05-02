@@ -10,7 +10,7 @@ export declare class CreateCertificateDTO {
     address: string;
     state: string;
     lga: string;
-    passortNumber: string;
+    passportNumber: string;
     dateOfIssue: string;
     dateOfExpiry: string;
     placeOfIssue: string;

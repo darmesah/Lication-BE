@@ -4,6 +4,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Patch,
   Post,
   Req,
@@ -14,7 +15,7 @@ import {
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { AuthGuard } from 'src/auth/guards';
-import {} from './dto';
+import { CreateCertificateDTO } from './dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { fileFilter } from 'src/common/service/fileUpload';
 
@@ -31,10 +32,34 @@ export class UserController {
     return req.user;
   }
 
+  @Get('get-certificate-applications')
+  @HttpCode(HttpStatus.OK)
+  async getCertificateApplications(@Req() req) {
+    return await this.userService.getCertificateApplications(req.user._id);
+  }
+
+  @Get('get-certificate-application/:certificateApplicationId')
+  @HttpCode(HttpStatus.OK)
+  async getCertificateApplication(
+    @Req() req,
+    @Param('certificateApplicationId') certificateApplicationId: string,
+  ) {
+    return await this.userService.getCertificateApplication(
+      req.user._id,
+      certificateApplicationId,
+    );
+  }
+
   @Post('create-certificate-application')
   @HttpCode(HttpStatus.OK)
-  async createCertificate(@Req() req, @Body() payload) {
-    return await this.userService.createCertificate(req.user._id, payload);
+  async createCertificateApplication(
+    @Req() req,
+    @Body() payload: CreateCertificateDTO,
+  ) {
+    return await this.userService.createCertificateApplication(
+      req.user._id,
+      payload,
+    );
   }
 
   // @Get('generate-user-verification-url')
