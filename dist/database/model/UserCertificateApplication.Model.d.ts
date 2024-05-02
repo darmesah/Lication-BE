@@ -30,16 +30,16 @@ export declare const UserCertificateApplicationSchema: mongoose.Schema<any, mong
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    userId: string;
     firstName: string;
-    middleName: string;
     lastName: string;
-    dateOfBirth: string;
-    stateOfOrigin: string;
-    lgaOfOrigin: string;
     email: string;
     phone: string;
     address: string;
+    userId: string;
+    middleName: string;
+    dateOfBirth: string;
+    stateOfOrigin: string;
+    lgaOfOrigin: string;
     state: string;
     lga: string;
     passportNumber: string;
@@ -60,16 +60,16 @@ export declare const UserCertificateApplicationSchema: mongoose.Schema<any, mong
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    userId: string;
     firstName: string;
-    middleName: string;
     lastName: string;
-    dateOfBirth: string;
-    stateOfOrigin: string;
-    lgaOfOrigin: string;
     email: string;
     phone: string;
     address: string;
+    userId: string;
+    middleName: string;
+    dateOfBirth: string;
+    stateOfOrigin: string;
+    lgaOfOrigin: string;
     state: string;
     lga: string;
     passportNumber: string;
@@ -90,16 +90,16 @@ export declare const UserCertificateApplicationSchema: mongoose.Schema<any, mong
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    userId: string;
     firstName: string;
-    middleName: string;
     lastName: string;
-    dateOfBirth: string;
-    stateOfOrigin: string;
-    lgaOfOrigin: string;
     email: string;
     phone: string;
     address: string;
+    userId: string;
+    middleName: string;
+    dateOfBirth: string;
+    stateOfOrigin: string;
+    lgaOfOrigin: string;
     state: string;
     lga: string;
     passportNumber: string;
