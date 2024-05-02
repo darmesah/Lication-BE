@@ -5,6 +5,11 @@ export class CreateCertificateDTO {
   @ApiProperty({ required: true })
   @IsString()
   @IsNotEmpty()
+  idNumber: string;
+
+  @ApiProperty({ required: true })
+  @IsString()
+  @IsNotEmpty()
   firstName: string;
 
   @ApiProperty({ required: false })
@@ -115,11 +120,6 @@ export class CreateCertificateDTO {
   @IsString()
   @IsNotEmpty()
   position: string;
-
-  @ApiProperty({ required: true })
-  @IsString()
-  @IsNotEmpty()
-  preferredAppointmentTime: string;
 
   @ApiProperty({ required: true })
   @IsString()

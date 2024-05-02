@@ -9,6 +9,10 @@ export const UserCertificateApplicationSchema = new Schema(
       required: true,
       ref: 'User',
     },
+    idNumber: {
+      type: String,
+      required: true,
+    },
     firstName: {
       type: String,
       required: true,
@@ -103,7 +107,14 @@ export const UserCertificateApplicationSchema = new Schema(
     },
     preferredAppointmentTime: {
       type: String,
-      required: true,
+      required: false,
+      default: '',
+    },
+    paymentStatus: {
+      type: String,
+      required: false,
+      enum: ['not-paid', 'paid'],
+      default: 'not-paid',
     },
     nearestCaptureCenter: {
       type: String,

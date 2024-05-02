@@ -36,6 +36,7 @@ export declare const UserCertificateApplicationSchema: mongoose.Schema<any, mong
     phone: string;
     address: string;
     userId: string;
+    idNumber: string;
     middleName: string;
     dateOfBirth: string;
     stateOfOrigin: string;
@@ -54,8 +55,9 @@ export declare const UserCertificateApplicationSchema: mongoose.Schema<any, mong
     employerName: string;
     employerAddress: string;
     position: string;
-    preferredAppointmentTime: string;
     nearestCaptureCenter: string;
+    preferredAppointmentTime?: string;
+    paymentStatus?: "not-paid" | "paid";
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
@@ -66,6 +68,7 @@ export declare const UserCertificateApplicationSchema: mongoose.Schema<any, mong
     phone: string;
     address: string;
     userId: string;
+    idNumber: string;
     middleName: string;
     dateOfBirth: string;
     stateOfOrigin: string;
@@ -84,8 +87,9 @@ export declare const UserCertificateApplicationSchema: mongoose.Schema<any, mong
     employerName: string;
     employerAddress: string;
     position: string;
-    preferredAppointmentTime: string;
     nearestCaptureCenter: string;
+    preferredAppointmentTime?: string;
+    paymentStatus?: "not-paid" | "paid";
 }>> & mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
@@ -96,6 +100,7 @@ export declare const UserCertificateApplicationSchema: mongoose.Schema<any, mong
     phone: string;
     address: string;
     userId: string;
+    idNumber: string;
     middleName: string;
     dateOfBirth: string;
     stateOfOrigin: string;
@@ -114,8 +119,9 @@ export declare const UserCertificateApplicationSchema: mongoose.Schema<any, mong
     employerName: string;
     employerAddress: string;
     position: string;
-    preferredAppointmentTime: string;
     nearestCaptureCenter: string;
+    preferredAppointmentTime?: string;
+    paymentStatus?: "not-paid" | "paid";
 }> & {
     _id: mongoose.Types.ObjectId;
 }>;

@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { cloudinaryUploader } from 'src/common/service/fileUpload';
 import { idVerification } from 'src/common/service/idVerification';
 import { IUser, IUserCertificateApplication } from 'src/database/interface';
-import { CreateCertificateDTO } from './dto';
+import { CreateCertificateDTO, ScheduleBiometricAppointmentDTO } from './dto';
 
 @Injectable()
 export class UserService {
@@ -63,6 +63,49 @@ export class UserService {
       return {
         message: 'Certifacate application',
         certificateApplication,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async payForCertificateApplication(
+    userId: string,
+    certificateApplicationId: string,
+  ) {
+    try {
+      await this.userCertificateApplicationModel.findOneAndUpdate(
+        {
+          userId,
+          _id: certificateApplicationId,
+        },
+        { paymentStatus: 'paid' },
+      );
+
+      return {
+        message: 'Certifacate application paid successfully',
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async scheduleBiometricAppointment(
+    userId: string,
+    certificateApplicationId: string,
+    payload: ScheduleBiometricAppointmentDTO,
+  ) {
+    try {
+      await this.userCertificateApplicationModel.findOneAndUpdate(
+        {
+          userId,
+          _id: certificateApplicationId,
+        },
+        { preferredAppointmentTime: payload.preferredAppointmentTime },
+      );
+
+      return {
+        message: 'Certifacate application paid successfully',
       };
     } catch (error) {
       throw error;

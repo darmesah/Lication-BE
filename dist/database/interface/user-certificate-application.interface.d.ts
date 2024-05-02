@@ -25,6 +25,7 @@
 import { Document } from 'mongoose';
 export interface IUserCertificateApplication extends Document {
     userId: string;
+    idNumber: string;
     firstName: string;
     middleName: string;
     lastName: string;
@@ -48,6 +49,7 @@ export interface IUserCertificateApplication extends Document {
     employerName: string;
     employerAddress: string;
     position: string;
-    preferredAppointmentTime: string;
     nearestCaptureCenter: string;
+    preferredAppointmentTime: string;
+    paymentStatus: 'not-paid' | 'paid';
 }

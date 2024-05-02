@@ -1,4 +1,5 @@
 export declare class CreateCertificateDTO {
+    idNumber: string;
     firstName: string;
     middleName: string;
     lastName: string;
@@ -22,6 +23,5 @@ export declare class CreateCertificateDTO {
     employerName: string;
     employerAddress: string;
     position: string;
-    preferredAppointmentTime: string;
     nearestCaptureCenter: string;
 }

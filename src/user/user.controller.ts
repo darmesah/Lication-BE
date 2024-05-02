@@ -15,7 +15,7 @@ import {
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { AuthGuard } from 'src/auth/guards';
-import { CreateCertificateDTO } from './dto';
+import { CreateCertificateDTO, ScheduleBiometricAppointmentDTO } from './dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { fileFilter } from 'src/common/service/fileUpload';
 
@@ -30,6 +30,18 @@ export class UserController {
   @HttpCode(HttpStatus.OK)
   async getUser(@Req() req) {
     return req.user;
+  }
+
+  @Post('create-certificate-application')
+  @HttpCode(HttpStatus.OK)
+  async createCertificateApplication(
+    @Req() req,
+    @Body() payload: CreateCertificateDTO,
+  ) {
+    return await this.userService.createCertificateApplication(
+      req.user._id,
+      payload,
+    );
   }
 
   @Get('get-certificate-applications')
@@ -50,14 +62,28 @@ export class UserController {
     );
   }
 
-  @Post('create-certificate-application')
+  @Get('pay-for-certificate-application/:certificateApplicationId')
   @HttpCode(HttpStatus.OK)
-  async createCertificateApplication(
+  async payForCertificateApplication(
     @Req() req,
-    @Body() payload: CreateCertificateDTO,
+    @Param('certificateApplicationId') certificateApplicationId: string,
   ) {
-    return await this.userService.createCertificateApplication(
+    return await this.userService.payForCertificateApplication(
       req.user._id,
+      certificateApplicationId,
+    );
+  }
+
+  @Post('schedule-biometric-appointment/:certificateApplicationId')
+  @HttpCode(HttpStatus.OK)
+  async scheduleBiometricAppointment(
+    @Req() req,
+    @Param('certificateApplicationId') certificateApplicationId: string,
+    @Body() payload: ScheduleBiometricAppointmentDTO,
+  ) {
+    return await this.userService.scheduleBiometricAppointment(
+      req.user._id,
+      certificateApplicationId,
       payload,
     );
   }

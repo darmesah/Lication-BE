@@ -65,6 +65,34 @@ let UserService = class UserService {
             throw error;
         }
     }
+    async payForCertificateApplication(userId, certificateApplicationId) {
+        try {
+            await this.userCertificateApplicationModel.findOneAndUpdate({
+                userId,
+                _id: certificateApplicationId,
+            }, { paymentStatus: 'paid' });
+            return {
+                message: 'Certifacate application paid successfully',
+            };
+        }
+        catch (error) {
+            throw error;
+        }
+    }
+    async scheduleBiometricAppointment(userId, certificateApplicationId, payload) {
+        try {
+            await this.userCertificateApplicationModel.findOneAndUpdate({
+                userId,
+                _id: certificateApplicationId,
+            }, { preferredAppointmentTime: payload.preferredAppointmentTime });
+            return {
+                message: 'Certifacate application paid successfully',
+            };
+        }
+        catch (error) {
+            throw error;
+        }
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([

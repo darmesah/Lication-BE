@@ -24,7 +24,7 @@
 /// <reference types="mongoose/types/inferschematype" />
 import { Model } from 'mongoose';
 import { IUser, IUserCertificateApplication } from 'src/database/interface';
-import { CreateCertificateDTO } from './dto';
+import { CreateCertificateDTO, ScheduleBiometricAppointmentDTO } from './dto';
 export declare class UserService {
     private userModel;
     private userCertificateApplicationModel;
@@ -46,5 +46,11 @@ export declare class UserService {
         certificateApplication: import("mongoose").Document<unknown, {}, IUserCertificateApplication> & IUserCertificateApplication & {
             _id: import("mongoose").Types.ObjectId;
         };
+    }>;
+    payForCertificateApplication(userId: string, certificateApplicationId: string): Promise<{
+        message: string;
+    }>;
+    scheduleBiometricAppointment(userId: string, certificateApplicationId: string, payload: ScheduleBiometricAppointmentDTO): Promise<{
+        message: string;
     }>;
 }

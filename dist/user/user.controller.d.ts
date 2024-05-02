@@ -24,11 +24,17 @@
 /// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
 import { UserService } from './user.service';
-import { CreateCertificateDTO } from './dto';
+import { CreateCertificateDTO, ScheduleBiometricAppointmentDTO } from './dto';
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
     getUser(req: any): Promise<any>;
+    createCertificateApplication(req: any, payload: CreateCertificateDTO): Promise<{
+        message: string;
+        newCertificate: import("mongoose").Document<unknown, {}, import("../database/interface").IUserCertificateApplication> & import("../database/interface").IUserCertificateApplication & {
+            _id: import("mongoose").Types.ObjectId;
+        };
+    }>;
     getCertificateApplications(req: any): Promise<{
         message: string;
         certificateApplications: (import("mongoose").Document<unknown, {}, import("../database/interface").IUserCertificateApplication> & import("../database/interface").IUserCertificateApplication & {
@@ -41,10 +47,10 @@ export declare class UserController {
             _id: import("mongoose").Types.ObjectId;
         };
     }>;
-    createCertificateApplication(req: any, payload: CreateCertificateDTO): Promise<{
+    payForCertificateApplication(req: any, certificateApplicationId: string): Promise<{
         message: string;
-        newCertificate: import("mongoose").Document<unknown, {}, import("../database/interface").IUserCertificateApplication> & import("../database/interface").IUserCertificateApplication & {
-            _id: import("mongoose").Types.ObjectId;
-        };
+    }>;
+    scheduleBiometricAppointment(req: any, certificateApplicationId: string, payload: ScheduleBiometricAppointmentDTO): Promise<{
+        message: string;
     }>;
 }

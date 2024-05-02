@@ -25,14 +25,20 @@ let UserController = class UserController {
     async getUser(req) {
         return req.user;
     }
+    async createCertificateApplication(req, payload) {
+        return await this.userService.createCertificateApplication(req.user._id, payload);
+    }
     async getCertificateApplications(req) {
         return await this.userService.getCertificateApplications(req.user._id);
     }
     async getCertificateApplication(req, certificateApplicationId) {
         return await this.userService.getCertificateApplication(req.user._id, certificateApplicationId);
     }
-    async createCertificateApplication(req, payload) {
-        return await this.userService.createCertificateApplication(req.user._id, payload);
+    async payForCertificateApplication(req, certificateApplicationId) {
+        return await this.userService.payForCertificateApplication(req.user._id, certificateApplicationId);
+    }
+    async scheduleBiometricAppointment(req, certificateApplicationId, payload) {
+        return await this.userService.scheduleBiometricAppointment(req.user._id, certificateApplicationId, payload);
     }
 };
 exports.UserController = UserController;
@@ -44,6 +50,15 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getUser", null);
+__decorate([
+    (0, common_1.Post)('create-certificate-application'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, dto_1.CreateCertificateDTO]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "createCertificateApplication", null);
 __decorate([
     (0, common_1.Get)('get-certificate-applications'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
@@ -62,14 +77,24 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getCertificateApplication", null);
 __decorate([
-    (0, common_1.Post)('create-certificate-application'),
+    (0, common_1.Get)('pay-for-certificate-application/:certificateApplicationId'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, common_1.Req)()),
-    __param(1, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)('certificateApplicationId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, dto_1.CreateCertificateDTO]),
+    __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
-], UserController.prototype, "createCertificateApplication", null);
+], UserController.prototype, "payForCertificateApplication", null);
+__decorate([
+    (0, common_1.Post)('schedule-biometric-appointment/:certificateApplicationId'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Param)('certificateApplicationId')),
+    __param(2, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String, dto_1.ScheduleBiometricAppointmentDTO]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "scheduleBiometricAppointment", null);
 exports.UserController = UserController = __decorate([
     (0, swagger_1.ApiTags)('User'),
     (0, swagger_1.ApiBearerAuth)(),
